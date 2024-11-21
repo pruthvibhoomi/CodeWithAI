@@ -53,7 +53,7 @@ train_dataset = datasets.MNIST('./data', train=True, download=True,
 # batch_size 64 , accuracy 92% 
 # batch_size 70 , 91%
 # batch size 45 , 95%
-train_loader = DataLoader(train_dataset, batch_size=50, shuffle=True)
+train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 
 # Initialize the model, optimizer, and loss function
 model = Net()
@@ -87,9 +87,6 @@ with torch.no_grad():
 
 accuracy = correct / total
 
-print(f"Total parameters: {total_params}")
-print(f"Accuracy: {accuracy}")
-
 # Assert that the model has less than 25000 parameters and achieves greater than 95% accuracy
-assert total_params < 25000
-assert accuracy > 0.95
+assert total_params < 25000, f'Total parameters: {total_params:.2f}% is not less than 25000'
+assert accuracy > 95, f'Accuracy: {accuracy:.2f}% is not greater than 95%'
