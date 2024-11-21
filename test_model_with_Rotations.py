@@ -85,7 +85,8 @@ model.eval()
 test_dataset = datasets.MNIST('./data', train=False, download=True,
                    transform=transforms.Compose([
                        transforms.ToTensor(),
-                       transforms.Normalize((0.1307,), (0.3081,))
+                       transforms.Normalize((0.1307,), (0.3081,)),
+                       transforms.RandomRotation(10),
                    ]))
 test_loader = DataLoader(test_dataset, batch_size=20, shuffle=True)
 with torch.no_grad():

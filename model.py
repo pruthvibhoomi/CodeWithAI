@@ -49,6 +49,7 @@ train_dataset = datasets.MNIST('./data', train=True, download=True,
                    transform=transforms.Compose([
                        transforms.ToTensor(),
                        transforms.Normalize((0.1307,), (0.3081,)),
+                       transforms.RandomRotation(10),
                    ]))
 # batch_size 64 , accuracy 92%, 94%
 # batch_size 70 , 91%
