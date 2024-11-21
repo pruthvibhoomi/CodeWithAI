@@ -64,7 +64,7 @@ model = Net()
 # with Adam , accuracy was around 93%
 # With SGD, gelu , batch_size=23, acc=90% with lr=0.01
 # With SGD,gelu,batch_size=23, acc=96 wth lr=0.1
-optimizer = optim.Adam(model.parameters())
+optimizer = optim.SGD(model.parameters(), lr=0.1)
 criterion = nn.CrossEntropyLoss()
 
 # Train the model for one epoch

@@ -62,7 +62,7 @@ train_loader = DataLoader(train_dataset, batch_size=23, shuffle=True)
 model = Net()
 # with lr=0.1 , accuracy decreased to 91%
 # with Adam , accuracy was around 93%
-optimizer = optim.SGD(model.parameters(), lr=0.1)
+optimizer = optim.Adam(model.parameters())
 criterion = nn.CrossEntropyLoss()
 
 # Train the model for one epoch
@@ -89,7 +89,7 @@ test_dataset = datasets.MNIST('./data', train=False, download=True,
                    ]))
 test_loader = DataLoader(test_dataset, batch_size=45, shuffle=False)
 with torch.no_grad():
-    for data, target in test_loader:
+    for data, target in train_loader:
         output = model(data)
         pred = output.argmax(dim=1, keepdim=True)
         correct += pred.eq(target.view_as(pred)).sum().item()

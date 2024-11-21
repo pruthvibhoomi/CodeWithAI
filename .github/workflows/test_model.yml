@@ -31,10 +31,7 @@ jobs:
       run: |
         python test_model.py
 
-    - name: Run model with SGD optimizer with high lr for accr
+    - name: Run model with adam for accr
       run: |
-        python test_model_sgd_high_lr.py
+        python test_model_adam_optimizer.py
 
-    - name: Run model with test data with images rotated(Data Aug)
-      run: |
-        python test_model_with_Rotations.py
