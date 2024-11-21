@@ -87,7 +87,7 @@ test_dataset = datasets.MNIST('./data', train=False, download=True,
                        transforms.ToTensor(),
                        transforms.Normalize((0.1307,), (0.3081,))
                    ]))
-test_loader = DataLoader(test_dataset, batch_size=45, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=20, shuffle=False)
 with torch.no_grad():
     for data, target in test_loader:
         output = model(data)

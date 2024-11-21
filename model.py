@@ -62,6 +62,8 @@ train_loader = DataLoader(train_dataset, batch_size=23, shuffle=True)
 model = Net()
 # with lr=0.1 , accuracy decreased to 91%
 # with Adam , accuracy was around 93%
+# With SGD, gelu , batch_size=23, acc=90% with lr=0.01
+# With SGD,gelu,batch_size=23, acc=96 wth lr=0.1
 optimizer = optim.Adam(model.parameters())
 criterion = nn.CrossEntropyLoss()
 
