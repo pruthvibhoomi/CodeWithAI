@@ -1,6 +1,10 @@
 name: Test MNIST Model
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   test:
@@ -33,15 +37,13 @@ from torch.utils.data import DataLoader
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 4, 3, 1, padding=1) # Increased output channels to 8
-        self.conv2 = nn.Conv2d(4, 8, 3, 1) # Added another convolutional layer
-        self.conv3 = nn.Conv2d(8, 4, 1) # Added a 1x1 convolutional layer
+        self.conv1 = nn.Conv2d(1, 4, 3, 1, padding=1)
+        self.conv2 = nn.Conv2d(4, 8, 3, 1)
+        self.conv3 = nn.Conv2d(8, 4, 1)
         self.dropout1 = nn.Dropout(0.25)
         self.dropout2 = nn.Dropout(0.5)
-        # Removed Global Average Pooling to reduce parameters
-        self.fc1 = nn.Linear(4 * 13 * 13, 32) # Adjusted input size to match the feature maps
-        self.fc2 = nn.Linear(32, 10) # Adjusted input size to match previous layer
-
+        self.fc1 = nn.Linear(4 * 13 * 13, 32)
+        self.fc2 = nn.Linear(32, 10)
 
     def forward(self, x):
         x = self.conv1(x)
@@ -50,7 +52,7 @@ class Net(nn.Module):
         x = F.relu(x)
         x = F.max_pool2d(x, 2)
         x = self.dropout1(x)
-        x = self.conv3(x) # Applying 1x1 convolution
+        x = self.conv3(x)
         x = F.relu(x)
         x = torch.flatten(x, 1)
         x = self.fc1(x)
@@ -61,25 +63,15 @@ class Net(nn.Module):
         return output
 
 # Load the MNIST dataset
-# Added only random rotations to see if it can increase the accuracy, but accuracy reduced to 91%
-# Rotations+RandomAffine accuracy reduced to 80%
-# Adam + above 2 data augs , accuracy slightly improved to 85%
-# Adam + Only RandomRotations , accuracy is 89%
-# Without normalization , accuracy slightly reduces to 93.6%
 train_dataset = datasets.MNIST('./data', train=True, download=True,
                    transform=transforms.Compose([
                        transforms.ToTensor(),
-                       transforms.Normalize((0.1307,), (0.3081,)),
+                       transforms.Normalize((0.1307,), (0.3081,))
                    ]))
-# batch_size 64 , accuracy 92% 
-# batch_size 70 , 91%
-# batch size 45 , 95%
 train_loader = DataLoader(train_dataset, batch_size=45, shuffle=True)
 
 # Initialize the model, optimizer, and loss function
 model = Net()
-# with lr=0.1 , accuracy decreased to 91%
-# with Adam , accuracy was around 93%
 optimizer = optim.Adam(model.parameters())
 criterion = nn.CrossEntropyLoss()
 

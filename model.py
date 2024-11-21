@@ -53,7 +53,7 @@ train_dataset = datasets.MNIST('./data', train=True, download=True,
 # batch_size 64 , accuracy 92% 
 # batch_size 70 , 91%
 # batch size 45 , 95%
-train_loader = DataLoader(train_dataset, batch_size=45, shuffle=True)
+train_loader = DataLoader(train_dataset, batch_size=50, shuffle=True)
 
 # Initialize the model, optimizer, and loss function
 model = Net()
