@@ -1,6 +1,6 @@
 # MNIST Model Training and Testing
 
-![Build Status](https://github.com/pruthvibhoomi/CodeWithAI/actions/workflows/test_model.yml/badge.svg
+![Build Status](https://github.com/pruthvibhoomi/CodeWithAI/actions/workflows/test_model.yml/badge.svg)
 
 This repository contains a simple implementation of a convolutional neural network (CNN) to classify handwritten digits from the MNIST dataset. The model is trained and evaluated using PyTorch.
 
