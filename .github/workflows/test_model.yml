@@ -26,3 +26,11 @@ jobs:
     - name: Run model test
       run: |
         python model.py
+    
+    - name: Run model with different test data for accr
+      run: |
+        python test_model.py
+
+    - name: Run model with SGD optimizer with high lr for accr
+      run: |
+        python test_model_sgd_high_lr.py
