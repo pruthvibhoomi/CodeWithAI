@@ -98,4 +98,4 @@ accuracy = correct / total
 
 # Assert that the model has less than 25000 parameters and achieves greater than 95% accuracy
 assert total_params < 25000, f'Total parameters: {total_params:.2f}% is not less than 25000'
-assert accuracy > 95, f'Accuracy: {accuracy:.2f}% is not greater than 95%'
+assert accuracy > 0.95, f'Accuracy: {accuracy:.2f}% is not greater than 95%'
