@@ -24,16 +24,16 @@ class Net(nn.Module):
 
     def forward(self, x):
         x = self.conv1(x)
-        x = F.relu(x)
+        x = F.gelu(x)
         x = self.conv2(x)
-        x = F.relu(x)
+        x = F.gelu(x)
         x = F.max_pool2d(x, 2)
         x = self.dropout1(x)
         x = self.conv3(x) # Applying 1x1 convolution
-        x = F.relu(x)
+        x = F.gelu(x)
         x = torch.flatten(x, 1)
         x = self.fc1(x)
-        x = F.relu(x)
+        x = F.gelu(x)
         x = self.dropout2(x)
         x = self.fc2(x)
         output = F.log_softmax(x, dim=1)
@@ -56,7 +56,7 @@ train_dataset = datasets.MNIST('./data', train=True, download=True,
 # with NO shuffle , batch_size = 64, acc=93
 # with NO suffle , batch_size=50,acc=91; batch_size=40,acc=94 , 
 # batch_size=45,acc=95, 47-->94, 46-->92 ,
-train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+train_loader = DataLoader(train_dataset, batch_size=23, shuffle=True)
 
 # Initialize the model, optimizer, and loss function
 model = Net()
@@ -98,4 +98,4 @@ accuracy = correct / total
 
 # Assert that the model has less than 25000 parameters and achieves greater than 95% accuracy
 assert total_params < 25000, f'Total parameters: {total_params:.2f}% is not less than 25000'
-assert accuracy >= 95, f'Accuracy: {accuracy:.2f}% is not greater than 95%'
+assert accuracy > 95, f'Accuracy: {accuracy:.2f}% is not greater than 95%'
